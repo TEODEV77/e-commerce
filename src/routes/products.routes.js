@@ -1,10 +1,25 @@
 const { Router } = require("express");
-const router = Router();
+const ProductMaganer = require("../class/productManager");
 
-router.get("/products", (req, res) => {
-  res.json({
-    msg: "Products works",
-  });
+const productManager = new ProductMaganer();
+
+const productsRouter = Router();
+
+productsRouter.get("/products", async (req, res) => {
+  try {
+    const out = await productManager.getProducts();
+    res.json(out);
+  } catch (error) {}
 });
 
-module.exports = router;
+productsRouter.post("/products", async (req, res) => {
+  const { body } = req;
+  try {
+    let out = await productManager.create(body);
+    res.json({
+      out
+    });
+  } catch (error) {}
+});
+
+module.exports = productsRouter;

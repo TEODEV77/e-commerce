@@ -1,0 +1,35 @@
+[
+	{
+		"id": "1d5ad26e-ec01-44b9-908b-22adc6022885",
+		"title": "Product 1",
+		"code": "1",
+		"category": "Category 1",
+		"description": "Description 1",
+		"stock": 70,
+		"price": 170,
+		"status": true,
+		"thumbnails": []
+	},
+	{
+		"id": "a00a8b91-c5fb-4907-933a-5979a977b081",
+		"title": "Product 2",
+		"code": "2",
+		"category": "Category 2",
+		"description": "Description 2",
+		"stock": 270,
+		"price": 270,
+		"status": true,
+		"thumbnails": []
+	},
+	{
+		"id": "962917e6-b0aa-4481-8f6e-347ba4248491",
+		"title": "Product 3",
+		"code": "3",
+		"category": "Category 3",
+		"description": "Description 3",
+		"stock": 370,
+		"price": 370,
+		"status": true,
+		"thumbnails": []
+	}
+]
