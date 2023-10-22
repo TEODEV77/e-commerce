@@ -17,7 +17,7 @@ class FSConfig {
     try {
       await fs.promises.writeFile(this.path, this.toJSON(list), "utf-8");
     } catch (error) {
-      console.log("File not created");
+      return null;
     }
   }
 
@@ -27,10 +27,10 @@ class FSConfig {
         const list = await fs.promises.readFile(this.path, "utf-8");
         return this.toArray(list);
       } catch (error) {
-        return [];
+        return null;
       }
     } else {
-      return [];
+      return null;
     }
   }
 }

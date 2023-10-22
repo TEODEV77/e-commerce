@@ -1,17 +1,45 @@
 [
 	{
-		"id": 1,
-		"name": "Product 1",
-		"price": 70
+		"id": "60635ebc-1399-4da6-bd0f-47d5b6d55fcd",
+		"products": [
+			{
+				"pid": "1",
+				"quantity": 1
+			},
+			{
+				"pid": "2",
+				"quantity": 1
+			},
+			{
+				"pid": "3",
+				"quantity": 1
+			},
+			{
+				"pid": "4",
+				"quantity": 1
+			}
+		]
 	},
 	{
-		"id": 2,
-		"name": "Product 2",
-		"price": 77
+		"id": "6f79e6e6-782c-4084-8ee2-90726e52a805",
+		"products": [
+			{
+				"pid": "1",
+				"quantity": 3
+			},
+			{
+				"pid": "2",
+				"quantity": 4
+			}
+		]
 	},
 	{
-		"id": 3,
-		"name": "Product 3",
-		"price": 90
+		"id": "631e7864-5902-4978-88b4-98c9d5c213e2",
+		"products": [
+			{
+				"pid": "1",
+				"quantity": 1
+			}
+		]
 	}
 ]
