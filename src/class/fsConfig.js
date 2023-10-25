@@ -22,14 +22,14 @@ class FSConfig {
   }
 
   async read() {
-    if (fs.existsSync(this.path)) {
-      try {
-        const list = await fs.promises.readFile(this.path, "utf-8");
-        return this.toArray(list);
-      } catch (error) {
-        return null;
-      }
-    } else {
+    if (!fs.existsSync(this.path)) {
+      return null;
+    }
+
+    try {
+      const list = await fs.promises.readFile(this.path, "utf-8");
+      return this.toArray(list);
+    } catch (error) {
       return null;
     }
   }
