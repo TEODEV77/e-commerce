@@ -56,12 +56,12 @@
 	},
 	{
 		"id": "670ef44f-3a40-484d-bcf5-33db9f9bf3cb",
+		"price": 399,
 		"title": "Dyson V12 Cordless Vacuum Cleaner",
 		"code": "6",
 		"category": "Home Appliance",
 		"description": "The Dyson V12 is a high-performance cordless vacuum cleaner that offers powerful suction, advanced filtration, and versatile cleaning attachments for a spotless home.",
 		"stock": 60,
-		"price": 399,
 		"status": true,
 		"thumbnails": []
 	},

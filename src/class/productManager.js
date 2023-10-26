@@ -66,11 +66,13 @@ class ProductMaganer {
   async update(id, body) {
     this.products = await fsConfig.read();
     const idx = await this.getIdx(id);
+    const clonProduct = this.products[idx];
     if (idx === -1) {
       return null;
     }
     const product = {
       id,
+      ...clonProduct,
       ...body,
     };
 

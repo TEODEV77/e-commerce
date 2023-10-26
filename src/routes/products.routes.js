@@ -62,7 +62,7 @@ productsRouter.get("/products/:id", async (req, res) => {
   }
 });
 
-productsRouter.put("/products/:id", async (req, res) => {
+productsRouter.patch("/products/:id", async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
