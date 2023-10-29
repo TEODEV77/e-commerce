@@ -4,12 +4,11 @@ const path = require("path");
 const productsRouter = require("./routes/products.routes");
 const cartsRouter = require("./routes/carts.routes");
 const ProductMaganer = require("./class/productManager");
+const socketProductRouter = require("./routes/product.socket.routes");
 
 const productManager = new ProductMaganer();
 
 const app = express();
-
-const PORT = 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -21,11 +20,12 @@ app.set("view engine", "handlebars");
 
 app.use("/api", productsRouter, cartsRouter);
 
+app.use('/', socketProductRouter);
+
+
 app.get("/", async (req, res) => {
   const products = await productManager.getProducts();
   res.render("home", {products});
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port http://localhost:${PORT}`);
-});
+module.exports = app;
