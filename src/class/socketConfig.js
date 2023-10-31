@@ -15,8 +15,7 @@ const init = (httpSever) => {
     socketClient.emit("products", products);
     socketClient.on("new-product", async (product) => {
       await productManager.create(product);
-      console.log("Created");
-      products = await productManager.getProducts();
+      console.log("Created", product);
       io.emit("products", products);
     });
   });
