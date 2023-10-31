@@ -7,6 +7,7 @@ socket.on("products", (products) => {
   products.forEach((product) => {
     const article = document.createElement('article');
     article.innerHTML = `<p><strong>Title</strong>: ${product.title}</p>
+    <p><strong>Code</strong>: ${product.code}</p>
     <p><strong>Category</strong>: ${product.category}</p>
     <p><strong>Description</strong>: ${product.description}</p>
     <p><strong>Stock</strong>: ${product.stock}</p>
@@ -24,6 +25,7 @@ form.addEventListener("submit", (e) => {
 
   const product = {
     title: document.getElementById('title').value,
+    code: document.getElementById('code').value,
     category: document.getElementById('category').value,
     description: document.getElementById('description').value,
     stock: document.getElementById('stock').value,

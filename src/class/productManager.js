@@ -50,8 +50,8 @@ class ProductMaganer {
       code,
       category,
       description,
-      stock,
-      price
+      parseInt(stock),
+      parseInt(price)
     );
 
     if (!this.checkCode(code)) {
