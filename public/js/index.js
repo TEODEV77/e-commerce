@@ -16,3 +16,25 @@ socket.on("products", (products) => {
     listProducts.appendChild(article);
   });
 });
+
+const form = document.getElementById("form-product");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const product = {
+    title: document.getElementById('title').value,
+    category: document.getElementById('category').value,
+    description: document.getElementById('description').value,
+    stock: document.getElementById('stock').value,
+    price: document.getElementById('price').value,
+  };
+
+  socket.emit("new-product", product);
+
+  document.getElementById('title').value = "";
+  document.getElementById('category').value = "";
+  document.getElementById('description').value = "";
+  document.getElementById('stock').value = "";
+  document.getElementById('price').value = "";
+});

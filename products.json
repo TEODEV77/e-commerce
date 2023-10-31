@@ -108,5 +108,15 @@
 		"price": 349,
 		"status": true,
 		"thumbnails": []
+	},
+	{
+		"id": "1c1355d5-b408-4b7f-bd05-3998eba4acf1",
+		"title": "7",
+		"category": "7",
+		"description": "7",
+		"stock": "7",
+		"price": "7",
+		"status": true,
+		"thumbnails": []
 	}
 ]
