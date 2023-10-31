@@ -14,9 +14,24 @@ const init = (httpSever) => {
     products = await productManager.getProducts();
     socketClient.emit("products", products);
     socketClient.on("new-product", async (product) => {
-      await productManager.create(product);
-      console.log("Created", product);
+      let productCode = product.code;
+      product = await productManager.create(product);
+      console.log(product, "Fire");
+      if (product === 0) {
+        socketClient.emit("fire", productCode);
+        return;
+      }
+      socketClient.emit('success-create', product)
       io.emit("products", products);
+    });
+
+    socketClient.on("delete-product", async (id) => {
+      const status = await productManager.delete(id);
+      if (status === null){
+        socketClient.emit("fireExists", id);
+        return;
+      }
+      socketClient.emit('success-delete', id)
     });
   });
 };

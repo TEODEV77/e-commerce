@@ -1,78 +1,107 @@
 <div class="container">
   <h1>Products - Sockets</h1>
-  <hr >
+  <hr />
   <div class="grid">
     <div>
-       <form id="form-product">
-    <div class="grid">
-      <label for="title">
-        Title
-        <input
-          type="text"
-          id="title"
-          name="title"
-          placeholder="Title"
-          required
-        />
-      </label>
+      <h3>Create product</h3>
+      <hr>
+      <form id="form-product">
+        <div class="grid">
+          <label for="title">
+            Title
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title"
+              required
+            />
+          </label>
 
-      <label for="code">
-        Code
-        <input type="text" id="code" name="code" placeholder="Code" required />
-      </label>
+          <label for="code">
+            Code
+            <input
+              type="text"
+              id="code"
+              name="code"
+              placeholder="Code"
+              required
+            />
+          </label>
 
-      <label for="category">
-        Category
-        <input
-          type="text"
-          id="category"
-          name="category"
-          placeholder="Category"
-          required
-        />
-      </label>
-    </div>
-    <label for="description">
-      Description
-      <input
-        type="text"
-        id="description"
-        name="description"
-        placeholder="Description"
-        required
-      />
-    </label>
+          <label for="category">
+            Category
+            <input
+              type="text"
+              id="category"
+              name="category"
+              placeholder="Category"
+              required
+            />
+          </label>
+        </div>
+        <label for="description">
+          Description
+          <input
+            type="text"
+            id="description"
+            name="description"
+            placeholder="Description"
+            required
+          />
+        </label>
 
-    <div class="grid">
-      <label for="stock">
-        Stock
-        <input
-          type="number"
-          id="stock"
-          name="stock"
-          placeholder="Stock"
-          required
-        />
-      </label>
-      <label for="price">
-        Price
-        <input
-          type="number"
-          id="price"
-          name="price"
-          placeholder="Price"
-          required
-        />
-      </label>
+        <div class="grid">
+          <label for="stock">
+            Stock
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              placeholder="Stock"
+              required
+            />
+          </label>
+          <label for="price">
+            Price
+            <input
+              type="number"
+              id="price"
+              name="price"
+              placeholder="Price"
+              required
+            />
+          </label>
+        </div>
+        <button type="submit">Create </button>
+      </form>
+      <h3>
+        Delete product
+      </h3>
+      <hr>
+      <form id="form-delete">
+        <label for="id">
+          Id Product
+          <input
+            type="text"
+            id="idProduct"
+            name="id"
+            placeholder="Id product"
+            required
+          />
+        </label>
+        <button type="submit">Delete </button>
     </div>
-    <button type="submit">Create </button>
-  </form>
+    <div>
+      <h3>Products</h3>
+      <hr>
+      <div id="products-list" class="container"></div>
     </div>
-     <div id="products-list" class="container"></div>
+    
   </div>
-  
- 
+
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="js/index.js"></script>
