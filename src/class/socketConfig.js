@@ -16,22 +16,32 @@ const init = (httpSever) => {
     socketClient.on("new-product", async (product) => {
       let productCode = product.code;
       product = await productManager.create(product);
-      console.log(product, "Fire");
       if (product === 0) {
         socketClient.emit("fire", productCode);
         return;
       }
-      socketClient.emit('success-create', product)
+      socketClient.emit("success-create", product);
       io.emit("products", products);
     });
 
-    socketClient.on("delete-product", async (id) => {
-      const status = await productManager.delete(id);
-      if (status === null){
+    socketClient.on("update-product", async (product) => {
+      const id = product.id;
+      delete product.id;
+      const status = await productManager.update(id,product);
+      if (status === null) {
         socketClient.emit("fireExists", id);
         return;
       }
-      socketClient.emit('success-delete', id)
+      socketClient.emit("success-update", id);
+      io.emit("products", products);
+    });
+    socketClient.on("delete-product", async (id) => {
+      const status = await productManager.delete(id);
+      if (status === null) {
+        socketClient.emit("fireExists", id);
+        return;
+      }
+      socketClient.emit("success-delete", id);
     });
   });
 };

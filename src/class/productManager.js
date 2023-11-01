@@ -55,7 +55,7 @@ class ProductMaganer {
     );
 
     if (!this.checkCode(code)) {
-      this.products.push(product);
+      this.products.unshift(product);
       await fsConfig.write(this.products);
       return product;
     } else {

@@ -1,12 +1,12 @@
 [
 	{
 		"id": "592e8153-768d-4c41-aeaf-03e5a10c5fc1",
-		"title": "iPhone 14 Pro",
-		"code": "1",
+		"title": "Iphone 77",
+		"code": "77",
 		"category": "Smartphone",
-		"description": "The iPhone 14 Pro is Apple's most advanced smartphone. It features a 6.1-inch OLED display, an A16 Bionic processor, a 48-megapixel triple camera, and long-lasting battery life.",
-		"stock": 100,
-		"price": 1299,
+		"description": "The iPhone 77 Pro is Apple's most advanced smartphone. It features a 6.1-inch OLED display, an A16 Bionic processor, a 48-megapixel triple camera, and long-lasting battery life.",
+		"stock": "700",
+		"price": "1070",
 		"status": true,
 		"thumbnails": []
 	},
@@ -106,6 +106,17 @@
 		"description": "The KitchenAid Artisan Stand Mixer is a kitchen essential, featuring powerful mixing, various attachments, and stylish design for all your baking and cooking needs.",
 		"stock": 55,
 		"price": 349,
+		"status": true,
+		"thumbnails": []
+	},
+	{
+		"id": "e44bad45-3e59-488b-8d86-41fae9181035",
+		"title": "77",
+		"code": "700",
+		"category": "77",
+		"description": "77",
+		"stock": 77,
+		"price": 77,
 		"status": true,
 		"thumbnails": []
 	}

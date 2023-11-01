@@ -16,23 +16,31 @@ socket.on("fireExists", (id) => {
   });
 });
 
-socket.on('success-create', (product) => {
+socket.on("success-create", (product) => {
   Swal.fire({
-    icon: 'success',
-    title: 'Your product has been saved',
+    icon: "success",
+    title: "Your product has been saved",
     showConfirmButton: false,
-    timer: 1700
-  })
-})
+    timer: 1700,
+  });
+});
 
-socket.on('success-delete', (id) => {
+socket.on("success-update", (id) => {
   Swal.fire({
-    icon: 'success',
+    icon: "success",
+    title: "Product updated",
+    text: `Product with id: ${id} has been updated`,
+  });
+});
+
+socket.on("success-delete", (id) => {
+  Swal.fire({
+    icon: "success",
     title: `Your product with id: ${id} has been deleted`,
     showConfirmButton: false,
-    timer: 3700
-  })
-})
+    timer: 3700,
+  });
+});
 
 socket.on("products", (products) => {
   const listProducts = document.getElementById("products-list");
@@ -73,6 +81,34 @@ form.addEventListener("submit", (e) => {
   document.getElementById("description").value = "";
   document.getElementById("stock").value = "";
   document.getElementById("price").value = "";
+});
+
+const updateForm = document.getElementById("form-update");
+
+updateForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const id = document.getElementById("uid").value;
+
+  const product = {
+    id,
+    title: document.getElementById("utitle").value,
+    code: document.getElementById("ucode").value,
+    category: document.getElementById("ucategory").value,
+    description: document.getElementById("udescription").value,
+    stock: document.getElementById("ustock").value,
+    price: document.getElementById("uprice").value,
+  };
+
+  socket.emit("update-product", (product));
+
+  document.getElementById("uid").value = "";
+  document.getElementById("utitle").value = "";
+  document.getElementById("ucode").value = "";
+  document.getElementById("ucategory").value = "";
+  document.getElementById("udescription").value = "";
+  document.getElementById("ustock").value = "";
+  document.getElementById("uprice").value = "";
 });
 
 const deleteForm = document.getElementById("form-delete");
