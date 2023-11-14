@@ -1,4 +1,4 @@
-const { Router } = require("express");
+import { Router } from "express";
 
 const socketProductRouter = Router();
 
@@ -6,4 +6,4 @@ socketProductRouter.get("/realtimeproducts", (req, res) => {
   res.render('realTimeProducts')
 });
 
-module.exports = socketProductRouter;
+export default socketProductRouter;

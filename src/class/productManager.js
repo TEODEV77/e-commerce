@@ -1,5 +1,5 @@
-const FSConfig = require("./fsConfig");
-const Product = require("./product");
+import FSConfig from '../dao/fs/fsConfig.js';
+import Product from './product.js';
 
 const fsConfig = new FSConfig("./products.json");
 
@@ -93,4 +93,4 @@ class ProductMaganer {
   }
 }
 
-module.exports = ProductMaganer;
+export default ProductMaganer;

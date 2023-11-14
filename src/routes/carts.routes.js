@@ -1,5 +1,6 @@
-const { Router } = require("express");
-const CartManager = require("../class/cartManager");
+import { Router } from "express";
+
+import CartManager from '../class/cartManager.js'
 
 const cartManager = new CartManager();
 const cartsRouter = Router();
@@ -55,4 +56,4 @@ cartsRouter.get("/carts/:id", async (req, res) => {
   }
 });
 
-module.exports = cartsRouter;
+export default cartsRouter;

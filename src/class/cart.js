@@ -1,5 +1,4 @@
-const { v4: uuid } = require("uuid");
-
+import { v4 as uuid } from 'uuid';
 class Cart {
   constructor() {
     this.id = uuid();
@@ -7,4 +6,4 @@ class Cart {
   }
 }
 
-module.exports = Cart;
+export default Cart;

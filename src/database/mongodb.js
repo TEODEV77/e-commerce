@@ -1,0 +1,12 @@
+import mongoose from "mongoose";
+
+const MONGO_URI = 'mongodb+srv://TEODEV77:lKyt7wMVi2dREgtaL@test.tkegg6l.mongodb.net/ecommerce?retryWrites=true&w=majority'
+
+export const initMongoDB  = async () => {
+    try {
+        await mongoose.connect(MONGO_URI);
+        console.log('MongoDB connected');
+    } catch (error) {
+        console.log(error.message);
+    }
+}

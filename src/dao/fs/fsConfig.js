@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from 'fs';
 
 class FSConfig {
   constructor(path) {
@@ -35,4 +35,4 @@ class FSConfig {
   }
 }
 
-module.exports = FSConfig;
+export default FSConfig;

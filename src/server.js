@@ -1,10 +1,13 @@
-const http = require("http");
+import http from 'http';
 
-const init = require("./class/socketConfig");
+import init from './class/socketConfig.js'
 
-const app = require('./index');
+import app from './index.js';
+import { initMongoDB } from './database/mongodb.js';
 
 const PORT = 3000;
+
+await initMongoDB();
 
 const server = http.createServer(app);
 

@@ -1,5 +1,5 @@
-const Cart = require("./cart");
-const FSConfig = require("./fsConfig");
+import Cart from './cart.js';
+import FSConfig from '../dao/fs/fsConfig.js';
 
 const fsConfig = new FSConfig("./carts.json");
 
@@ -64,4 +64,4 @@ class CartManager {
   }
 }
 
-module.exports = CartManager;
+export default CartManager;
