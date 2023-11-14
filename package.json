@@ -5,8 +5,8 @@
   "main": "src/server.js",
   "type": "module",
   "scripts": {
-    "start": "node .",
-    "dev": "nodemon ."
+    "start": "node --env-file .env .",
+    "dev": "nodemon --env-file .env ."
   },
   "author": "TEODEV77",
   "license": "GPL-3.0-only",
