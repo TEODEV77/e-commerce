@@ -5,7 +5,7 @@ import init from './class/socketConfig.js'
 import app from './index.js';
 import { initMongoDB } from './database/mongodb.js';
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 await initMongoDB();
 
