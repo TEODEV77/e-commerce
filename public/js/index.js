@@ -1,5 +1,33 @@
 const socket = io();
 
+const flagMongo = true;
+
+socket.on("get-products", (products) => {
+  const divProducts = document.getElementById("products-list-mongo");
+  divProducts.innerHTML = "";
+  products.forEach((product) => {
+    const article = document.createElement("article");
+    article.innerHTML = `<p><strong>Title</strong>: ${product.title}</p>
+    <p><strong>Code</strong>: ${product.code}</p>
+    <p><strong>Category</strong>: ${product.category}</p>
+    <p><strong>Description</strong>: ${product.description}</p>
+    <p><strong>Stock</strong>: ${product.stock}</p>
+    <p><strong>Price</strong>: ${product.price}</p>
+    <p><strong>Status</strong>: ${product.status}</p>
+    <p><strong>Thumbnails</strong>: ${product.thumbnails}</p>`;
+    divProducts.appendChild(article);
+  });
+});
+
+socket.on("test-created", (message) => {
+  Swal.fire({
+    icon: "success",
+    title: message,
+    showConfirmButton: false,
+    timer: 1700,
+  });
+});
+
 socket.on("fire", (code) => {
   Swal.fire({
     icon: "error",
@@ -90,7 +118,7 @@ updateForm.addEventListener("submit", (e) => {
 
   const id = document.getElementById("uid").value;
 
-  const product = {
+  const body = {
     id,
     title: document.getElementById("utitle").value,
     code: document.getElementById("ucode").value,
@@ -100,7 +128,7 @@ updateForm.addEventListener("submit", (e) => {
     price: document.getElementById("uprice").value,
   };
 
-  socket.emit("update-product", (product));
+  socket.emit("update-product", body);
 
   document.getElementById("uid").value = "";
   document.getElementById("utitle").value = "";
