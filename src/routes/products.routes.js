@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { success, error as err} from '../class/response.js';
+import { success, error as err } from "../class/response.js";
 
 import {
   createProductAdapter,
@@ -17,12 +17,9 @@ productsRouter.post("/products", async (req, res) => {
 
   try {
     const newProduct = await createProductAdapter(body);
-    
-    success(res,newProduct,'Created',201);
-    
+    success(res, newProduct, "Created", 201);
   } catch (error) {
-    
-    err(res,'Bad Request','All fields required / Code must be unique',400);
+    err(res, "Bad Request", "All fields required / Code must be unique", 400);
   }
 });
 
@@ -31,42 +28,46 @@ productsRouter.get("/products", async (req, res) => {
 
   try {
     const products = await getProductsAdapter(limit);
-    res.status(200).json(products);
+    success(res, products, "Successfully", 200);
   } catch (error) {
-    res.status(500).json({
-      payload: {
-        statusCode: 500,
-        error: "Internal Server Error",
-        message: "An internal server error occurred",
-      },
-    });
+    err(res, "Internal Server Error", "An internal server error occurred", 500);
   }
 });
 
 productsRouter.get("/products/:id", async (req, res) => {
   const { id } = req.params;
 
-  const product = await getProductByIdAdapter(id);
-  res.status(200).json(product);
+  try {
+    const product = await getProductByIdAdapter(id);
+    success(res, product, "Successfully", 200);
+  } catch (error) {
+    err(res, "Not Found", "Product not found", 404);
+  }
 });
 
 productsRouter.put("/products/:id", async (req, res) => {
   const { id } = req.params;
   const { body } = req;
 
-  await updateProductAdapter(id, body);
-  res.status(201).json({
-    message: `Product with id: ${id} has been updated`,
-  });
+  try {
+    await updateProductAdapter(id, body);
+    success(res, `Product with id: ${id} has been updated`, "Updated Successfully", 201);
+  } catch (error) {
+    err(res, "Not Found", "Product not found", 404);
+  }
+
 });
 
 productsRouter.delete("/products/:id", async (req, res) => {
   const { id } = req.params;
 
-  await deleteProductAdapter(id);
-  res.status(200).json({
-    message: `Product with id: ${id} has been deleted`,
-  });
+  try {
+    await deleteProductAdapter(id);
+    success(res, `Product with id: ${id} has been deleted`, "Deleted Successfully", 200);
+  } catch (error) {
+    err(res, "Not Found", "Product not found", 404);
+  }
+
 });
 
 export default productsRouter;
