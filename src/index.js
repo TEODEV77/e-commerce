@@ -7,6 +7,7 @@ import productsRouter from './routes/products.routes.js';
 import cartsRouter from './routes/carts.routes.js';
 
 import socketProductRouter from './routes/product.socket.routes.js'
+import chatRouter from './routes/chat.routes.js';
 
 
 
@@ -22,7 +23,7 @@ app.set("view engine", "handlebars");
 
 app.use("/api", productsRouter, cartsRouter);
 
-app.use('/', socketProductRouter);
+app.use('/', socketProductRouter, chatRouter);
 
 
 app.get("/", async (req, res) => {

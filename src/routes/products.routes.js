@@ -1,49 +1,54 @@
 import { Router } from "express";
 
-import ProductMaganer from "../class/productManager.js";
 import {
   createProductAdapter,
   deleteProductAdapter,
+  getProductByIdAdapter,
   getProductsAdapter,
   updateProductAdapter,
 } from "../dao/productAdapter.js";
-
-const productManager = new ProductMaganer();
 
 const productsRouter = Router();
 
 productsRouter.post("/products", async (req, res) => {
   const { body } = req;
 
-  if (body) {
-    await createProductAdapter(body);
-    res.status(201).json({
-      message: "Product has been created",
+  try {
+    const newProduct = await createProductAdapter(body);
+    res.status(201).json(newProduct);
+  } catch (error) {
+    res.status(400).json({
+      payload: {
+        statusCode: 400,
+        error: "Bad Request",
+        message: "All fields required / Code must be unique",
+      },
     });
-    return;
   }
 });
 
 productsRouter.get("/products", async (req, res) => {
   const { limit } = req.query;
 
-  const products = await getProductsAdapter(limit);
-  res.status(200).json(products);
+  try {
+    const products = await getProductsAdapter(limit);
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({
+      payload: {
+        statusCode: 500,
+        error: "Internal Server Error",
+        message: "An internal server error occurred",
+      },
+    });
+  }
 });
 
 productsRouter.get("/products/:id", async (req, res) => {
   const { id } = req.params;
 
-  if (id) {
-    const product = await productManager.getProductsById(id);
-    if (product) {
-      res.status(200).json(product);
-    } else {
-      res.status(404).json({ error: `No product exists with id ${id}` });
-    }
-  } else {
-    res.status(400).json({ error: "Id is invalid / Not sent " });
-  }
+  const product = await getProductByIdAdapter(id);
+  res.status(200).json(product);
 });
 
 productsRouter.put("/products/:id", async (req, res) => {
