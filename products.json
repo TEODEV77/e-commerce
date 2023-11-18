@@ -1,23 +1,13 @@
 [
-	{
-		"id": "786fe0f7-ee5c-47da-8163-e2981cbde0d7",
-		"title": "99",
-		"code": "99",
-		"category": "99",
-		"description": "99",
-		"stock": 99,
-		"price": 99,
-		"status": true,
-		"thumbnails": []
-	},
+	
 	{
 		"id": "592e8153-768d-4c41-aeaf-03e5a10c5fc1",
-		"title": "Iphone 77",
-		"code": "77",
+		"title": "Iphone 14",
+		"code": "1",
 		"category": "Smartphone",
 		"description": "The iPhone 77 Pro is Apple's most advanced smartphone. It features a 6.1-inch OLED display, an A16 Bionic processor, a 48-megapixel triple camera, and long-lasting battery life.",
-		"stock": "700",
-		"price": "1070",
+		"stock": 520,
+		"price": 1750,
 		"status": true,
 		"thumbnails": []
 	},
@@ -119,16 +109,6 @@
 		"price": 349,
 		"status": true,
 		"thumbnails": []
-	},
-	{
-		"id": "e44bad45-3e59-488b-8d86-41fae9181035",
-		"title": "77",
-		"code": "700",
-		"category": "77",
-		"description": "77",
-		"stock": 77,
-		"price": 77,
-		"status": true,
-		"thumbnails": []
 	}
+
 ]

@@ -1,6 +1,7 @@
 import { Router } from "express";
 
-import CartManager from "../class/cartManager.js";
+import { success, error as err } from "../class/response.js";
+
 import {
   createCartAdapter,
   getCartsAdapter,
@@ -8,34 +9,46 @@ import {
   addProductToCartAdapter,
 } from "../dao/cartAdapter.js";
 
-const cartManager = new CartManager();
 const cartsRouter = Router();
 
 cartsRouter.post("/carts", async (req, res) => {
-  let body = {
-    products: [],
-  };
-  await createCartAdapter(body);
-  res.status(201).json({
-    message: "Cart has been created",
-  });
+  try {
+    const cart = await createCartAdapter();
+    success(res, cart, "Cart has been created", 201);
+  } catch (error) {
+    err(res, "Bad Request", "Something Broke !", 400);
+  }
 });
 
 cartsRouter.post("/carts/:cid/:pid", async (req, res) => {
   const { cid, pid } = req.params;
-  await addProductToCartAdapter(cid, pid);
-  res.json({ ok: true });
+
+  try {
+    const cart = await addProductToCartAdapter(cid, pid);
+    success(res, cart, "Product added to cart successfully", 200);
+  } catch (error) {
+    err(res, "Bad Request", "Something Broke !", 400);
+  }
+
 });
 
 cartsRouter.get("/carts", async (req, res) => {
-  const carts = await getCartsAdapter();
-  res.status(200).json(carts);
+  try {
+    const carts = await getCartsAdapter();
+    success(res, carts, "All Carts fetched successfully", 200);
+  } catch (error) {
+    err(res, "Bad Request", "Something Broke !", 400);
+  }
 });
 
 cartsRouter.get("/carts/:id", async (req, res) => {
   const { id } = req.params;
-  const cart = await getCartByIdAdapter(id);
-  res.status(200).json(cart);
+  try {
+    const cart = await getCartByIdAdapter(id);
+    success(res, cart, "Cart fetched successfully", 200);
+  } catch (error) {
+    err(res, "Not Found", `Cart with ${id} not found`, 404);
+  }
 });
 
 export default cartsRouter;
