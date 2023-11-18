@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import { success, error as err} from '../class/response.js';
+
 import {
   createProductAdapter,
   deleteProductAdapter,
@@ -15,15 +17,12 @@ productsRouter.post("/products", async (req, res) => {
 
   try {
     const newProduct = await createProductAdapter(body);
-    res.status(201).json(newProduct);
+    
+    success(res,newProduct,'Created',201);
+    
   } catch (error) {
-    res.status(400).json({
-      payload: {
-        statusCode: 400,
-        error: "Bad Request",
-        message: "All fields required / Code must be unique",
-      },
-    });
+    
+    err(res,'Bad Request','All fields required / Code must be unique',400);
   }
 });
 
