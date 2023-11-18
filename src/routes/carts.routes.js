@@ -1,59 +1,41 @@
 import { Router } from "express";
 
-import CartManager from '../class/cartManager.js'
+import CartManager from "../class/cartManager.js";
+import {
+  createCartAdapter,
+  getCartsAdapter,
+  getCartByIdAdapter,
+  addProductToCartAdapter,
+} from "../dao/cartAdapter.js";
 
 const cartManager = new CartManager();
 const cartsRouter = Router();
 
 cartsRouter.post("/carts", async (req, res) => {
-  const carts = await cartManager.create();
-  if (carts === 0) {
-    res.status(404).json({ message: "File could not be read" });
-  } else {
-    res.status(201).json({ message: "Cart has been created" });
-  }
+  let body = {
+    products: [],
+  };
+  await createCartAdapter(body);
+  res.status(201).json({
+    message: "Cart has been created",
+  });
 });
 
 cartsRouter.post("/carts/:cid/:pid", async (req, res) => {
   const { cid, pid } = req.params;
-  const cart = await cartManager.addProductCart(cid, pid);
-  if (cart === 0) {
-    res.status(404).json({ message: `No cart exists with id ${cid}` });
-  } else {
-    res
-      .status(201)
-      .json({ message: `Product has been added to cart`, cartID: cid });
-  }
+  await addProductToCartAdapter(cid, pid);
+  res.json({ ok: true });
 });
 
 cartsRouter.get("/carts", async (req, res) => {
-  const carts = await cartManager.getCarts();
-  if (carts) {
-    res.status(200).json(carts);
-  } else {
-    res.status(404).json({ message: "File could not be read" });
-  }
+  const carts = await getCartsAdapter();
+  res.status(200).json(carts);
 });
 
 cartsRouter.get("/carts/:id", async (req, res) => {
   const { id } = req.params;
-
-  if (id) {
-    const cart = await cartManager.productsCart(id);
-
-    switch (cart) {
-      case 0:
-        res.status(404).json({ message: `No cart exists with id ${id}` });
-        break;
-      case 1:
-        res.status(404).json({ message: "File could not be read" });
-        break;
-      default:
-        res.status(200).json(cart);
-    }
-  } else {
-    res.status(400).json({ message: "No id was provided" });
-  }
+  const cart = await getCartByIdAdapter(id);
+  res.status(200).json(cart);
 });
 
 export default cartsRouter;
