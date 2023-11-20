@@ -22,12 +22,14 @@ cartsRouter.post("/carts", async (req, res) => {
 
 cartsRouter.post("/carts/:cid/:pid", async (req, res) => {
   const { cid, pid } = req.params;
+  const { quantity } = req.body;
 
   try {
-    const cart = await addProductToCartAdapter(cid, pid);
+    const cart = await addProductToCartAdapter(cid, pid, quantity);
     success(res, cart, "Product added to cart successfully", 200);
   } catch (error) {
     err(res, "Bad Request", "Something Broke !", 400);
+    console.error(error.message);
   }
 
 });

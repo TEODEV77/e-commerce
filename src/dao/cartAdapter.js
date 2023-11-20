@@ -1,6 +1,7 @@
 import cartSchema from "./models/cart.model.js";
 import ProductMaganer from "../class/productManager.js";
 import cartManager from "../class/cartManager.js";
+import { getProductByIdAdapter } from "./productAdapter.js";
 
 const flagMongo = true;
 
@@ -17,22 +18,28 @@ export const createCartAdapter = async () => {
   cartManager.addCart();
 };
 
-export const addProductToCartAdapter = async (cid, pid) => {
+export const addProductToCartAdapter = async (cid, pid, quantity) => {
   if (flagMongo) {
     const cart = await getCartByIdAdapter(cid);
-    const product = cart.products.find((product) => product.pid === pid);
+    const getProduct = await getProductByIdAdapter(pid);
 
-    if (product) {
-      product.quantity++;
-      const cartUpdated = await cartSchema.updateOne({ _id: cid }, cart);
-      return cartUpdated;
+    if (getProduct) {
+      const productExists = cart.products.find((pr) => pr.product == pid);
+      if (productExists) {
+        productExists.quantity += quantity;
+        const out = await cartSchema.updateOne({ _id: cid }, cart);
+        return out;
+      }
+
+      const newProduct = {
+        product: getProduct._id,
+        quantity: quantity,
+      };
+
+      cart.products.push(newProduct);
+      const out = await cartSchema.updateOne({ _id: cid }, cart);
+      return out;
     }
-    cart.products.push({
-      pid,
-      quantity: 1,
-    });
-    const cartUpdated = await cartSchema.updateOne({ _id: cid }, cart);
-    return cartUpdated;
   }
 };
 

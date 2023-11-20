@@ -21,14 +21,9 @@ app.engine("handlebars", engine());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
-app.use("/api", productsRouter, cartsRouter);
+app.use("/api", productsRouter,cartsRouter);
 
 app.use('/', socketProductRouter, chatRouter);
 
-
-app.get("/", async (req, res) => {
- // const products = await productManager.getProducts();
-  //res.render("home", {products});
-});
 
 export default app;
