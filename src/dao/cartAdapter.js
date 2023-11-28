@@ -26,7 +26,7 @@ export const addProductToCartAdapter = async (cid, pid, quantity) => {
     if (getProduct) {
       const productExists = cart.products.find((pr) => pr.product == pid);
       if (productExists) {
-        productExists.quantity += quantity;
+        productExists.quantity = quantity;
         const out = await cartSchema.updateOne({ _id: cid }, cart);
         return out;
       }
@@ -43,6 +43,38 @@ export const addProductToCartAdapter = async (cid, pid, quantity) => {
   }
 };
 
+export const addArray = async (id,p) => {
+  const cart = await getCartByIdAdapter(id);
+
+  if(cart){
+    cart.products = p;
+    const out = await cartSchema.updateOne({ _id: id }, cart);
+    return out;
+  }
+}
+
+export const deleteProductToCartAdapter = async (cid, pid) => {
+  const cart = await getCartByIdAdapter(cid);
+  const idx = cart.products.findIndex((pr) => pr.product == pid);
+
+  if (idx === -1) {
+  } else {
+    cart.products.splice(idx, 1);
+    const out = await cartSchema.updateOne({ _id: cid }, cart);
+    return out;
+  }
+};
+
+export const deleteAllProductToCartAdapter = async (cid) => {
+  const cart = await getCartByIdAdapter(cid);
+
+  if (cart) {
+    cart.products = [];
+    const out = await cartSchema.updateOne({ _id: cid }, cart);
+    return out;
+  }
+};
+
 export const getCartByIdAdapter = async (id) => {
   if (flagMongo) {
     const cart = await cartSchema.findOne({ _id: id });
@@ -50,6 +82,11 @@ export const getCartByIdAdapter = async (id) => {
   }
 
   return cartManager.getCart(id);
+};
+
+export const getCartPopulate = async (id) => {
+  const cart = await cartSchema.findOne({ _id: id }).populate("products.product");
+  return cart;
 };
 
 export const getCartsAdapter = async () => {

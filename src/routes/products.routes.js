@@ -1,12 +1,13 @@
 import { Router } from "express";
 
-import { success, error as err } from "../class/response.js";
+import { success, paginateResponseSuccess, error as err } from "../class/response.js";
 
 import {
   createProductAdapter,
   deleteProductAdapter,
   getProductByIdAdapter,
   getProductsAdapter,
+  test,
   updateProductAdapter,
 } from "../dao/productAdapter.js";
 
@@ -24,13 +25,31 @@ productsRouter.post("/products", async (req, res) => {
 });
 
 productsRouter.get("/products", async (req, res) => {
-  const { limit } = req.query;
+  const { limit = 10, page = 1, category, stock , sort } = req.query;
+
+  const options = { limit, page};
+  const queryCriteria = {}; 
+
+  if(sort){
+    options.sort = {price: sort};
+  }
+
+  if(category){
+    queryCriteria.category = category;
+  }
+
+  if(stock){
+    queryCriteria.stock = stock;
+  }
 
   try {
-    const products = await getProductsAdapter(limit);
-    success(res, products, "Successfully", 200);
+    //const products = await getProductsAdapter(limit);
+    const out = await test(queryCriteria,options);
+    const out2 = paginateResponseSuccess(out);
+    res.json(out2);
+    //success(res, products, "Successfully", 200);
   } catch (error) {
-    err(res, "Internal Server Error", "An internal server error occurred", 500);
+    err(res, "Internal Server Error", error.message, 500);
   }
 });
 

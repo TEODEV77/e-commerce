@@ -8,6 +8,7 @@ import cartsRouter from './routes/carts.routes.js';
 
 import socketProductRouter from './routes/product.socket.routes.js'
 import chatRouter from './routes/chat.routes.js';
+import productsViewRouter from './routes/views/products.render.routes.js';
 
 
 
@@ -22,8 +23,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
 app.use("/api", productsRouter,cartsRouter);
-
-app.use('/', socketProductRouter, chatRouter);
+app.use('/', socketProductRouter, chatRouter, productsViewRouter);
 
 
 export default app;

@@ -12,6 +12,12 @@ export const createProductAdapter = async (product) => {
   productManager.create(product);
 };
 
+export const test = async (queryCriteria, options) => {
+
+  const out = await productSchema.paginate(queryCriteria,options);
+  return out;
+}
+
 export const getProductByIdAdapter = async (id) => {
   if (flagMongo) {
     const product = await productSchema.findOne({ _id: id });
