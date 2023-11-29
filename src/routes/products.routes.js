@@ -6,8 +6,7 @@ import {
   createProductAdapter,
   deleteProductAdapter,
   getProductByIdAdapter,
-  getProductsAdapter,
-  test,
+  getProducts,
   updateProductAdapter,
 } from "../dao/productAdapter.js";
 
@@ -43,11 +42,9 @@ productsRouter.get("/products", async (req, res) => {
   }
 
   try {
-    //const products = await getProductsAdapter(limit);
-    const out = await test(queryCriteria,options);
-    const out2 = paginateResponseSuccess(out);
-    res.json(out2);
-    //success(res, products, "Successfully", 200);
+    const products = await getProducts(queryCriteria,options);
+    const productsPaginate = paginateResponseSuccess(products);
+    res.json(productsPaginate);
   } catch (error) {
     err(res, "Internal Server Error", error.message, 500);
   }

@@ -12,7 +12,7 @@ export const createProductAdapter = async (product) => {
   productManager.create(product);
 };
 
-export const test = async (queryCriteria, options) => {
+export const getProducts = async (queryCriteria, options) => {
 
   const out = await productSchema.paginate(queryCriteria,options);
   return out;

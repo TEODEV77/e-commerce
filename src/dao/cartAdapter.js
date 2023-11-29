@@ -1,5 +1,4 @@
 import cartSchema from "./models/cart.model.js";
-import ProductMaganer from "../class/productManager.js";
 import cartManager from "../class/cartManager.js";
 import { getProductByIdAdapter } from "./productAdapter.js";
 

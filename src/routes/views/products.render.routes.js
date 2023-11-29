@@ -1,31 +1,31 @@
 import { Router } from "express";
-import { test } from "../../dao/productAdapter.js";
+import { getProducts } from "../../dao/productAdapter.js";
 import { paginateResponseSuccess } from "../../class/response.js";
 
 const productsViewRouter = Router();
 
 productsViewRouter.get("/products", async (req, res) => {
-  const { limit = 10, page = 1, category, stock, sort } = req.query;
-  const options = { limit, page };
-  const queryCriteria = {};
+  const { limit = 10, page = 1, category, stock , sort } = req.query;
 
-  if (sort) {
-    options.sort = { price: sort };
+  const options = { limit, page};
+  const queryCriteria = {}; 
+
+  if(sort){
+    options.sort = {price: sort};
   }
 
-  if (category) {
+  if(category){
     queryCriteria.category = category;
   }
 
-  if (stock) {
+  if(stock){
     queryCriteria.stock = stock;
   }
-
   try {
 
-    const out = await test(queryCriteria, options);
-    const out2 = paginateResponseSuccess(out);
-    res.render('products', out2);
+    const products = await getProducts(queryCriteria,options);
+    const productsPaginate = paginateResponseSuccess(products);
+    res.render('products', productsPaginate);
    
   } catch (error) {
   
