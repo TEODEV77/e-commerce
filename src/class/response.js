@@ -30,8 +30,8 @@ export const paginateResponseSuccess = (out) => {
     pagingCounter: out.pagingCounter,
     hasPrevPage: out.hasPrevPage,
     hasNextPage: out.hasNextPage,
-    prevPage: `http://localhost:7000/products?limit=${out.limit}&page=${out.prevPage}`,
-    nextPage: `http://localhost:7000/products?limit=${out.limit}&page=${out.nextPage}`,
+    prevPage: `http://localhost:${process.env.PORT}/products?limit=${out.limit}&page=${out.prevPage}`,
+    nextPage: `http://localhost:${process.env.PORT}/products?limit=${out.limit}&page=${out.nextPage}`,
   }
 }
 

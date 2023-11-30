@@ -13,53 +13,35 @@
     </div>
   </div>
 
+
+  <table>
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+
   {{#each payload}}
-    <article>
+    <tr>
+      <td>{{this.title}}</td>
+      <td>{{this.category}}</td>
+      <td>{{this.description}} </td>
+      <td>{{this.stock}} </td>
+      <td>{{this.price}}</td>
+      <td> <button  onclick="addToCart('{{this._id}}')"> Add to cart </button> </td>
+      
+    </tr>
 
-      <form  id="formProduct">
-        <label hidden for="idProduct">
-          <input id="idProduct" value="{{this._id}}" type="text">
-        </label>
-        <label for="title">
-          <strong>Title</strong>
-          <input disabled id="title" name="title" value="{{this.title}}">
-        </label>
+    {{/each}}
+  </tbody>
+</table>
 
-        <label for="code">
-          <strong>Code</strong>
-          <input disabled id="code" name="code" value="{{this.code}}">
-        </label>
-
-        <label for="category">
-          <strong>Category</strong>
-          <input disabled id="category" name="category" value="{{this.category}}">
-        </label>
-
-        <label for="description">
-          <strong>Description</strong>
-          <textarea disabled  name="description" id="description"> {{ this.description }} </textarea>
-        </label>
-
-        <label for="stock">
-          <strong>Stock</strong>
-          <input disabled id="stock" name="stock" value="{{this.stock}}">
-        </label>
-
-        <label for="price">
-          <strong>Price</strong>
-          <input disabled id="price" name="price" value="{{this.price}}">
-        </label>
-
-        <label for="quantity">
-          <strong>Quantity</strong>
-          <input id="quantity" name="quantity"  type="number" max="{{this.stock}}">
-        </label>
-
-        <button value=> Add to cart </button>
-      </form>
-     
-    </article>
-  {{/each}}
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
