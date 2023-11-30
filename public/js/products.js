@@ -41,6 +41,25 @@ const getQuantity = async () => {
 
 getCartId();
 
+const successAddToCart = (pid) => {
+  Swal.fire({
+    icon: "success",
+    title: `Your product with id: ${pid} has been added`,
+    showConfirmButton: false,
+    timer: 3700,
+  });
+}
+
+const errAddToCart = () => {
+  Swal.fire({
+    icon: "error",
+    title: `Something Broke !`,
+    showConfirmButton: false,
+    timer: 3700,
+  });
+}
+
+
 const addToCart = async (pid) => {
   quantity = prompt('Enter quantity');
 
@@ -52,9 +71,9 @@ const addToCart = async (pid) => {
     },
   })
     .then((res) => {
-      console.log(res);
+      successAddToCart(pid);
     })
     .catch((err) => {
-      console.log(err);
+      errAddToCart();
     });
 };

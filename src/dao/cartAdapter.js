@@ -25,7 +25,7 @@ export const addProductToCartAdapter = async (cid, pid, quantity) => {
     if (getProduct) {
       const productExists = cart.products.find((pr) => pr.product == pid);
       if (productExists) {
-        productExists.quantity = quantity;
+        productExists.quantity += quantity;
         const out = await cartSchema.updateOne({ _id: cid }, cart);
         return out;
       }

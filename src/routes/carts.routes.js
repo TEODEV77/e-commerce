@@ -28,6 +28,7 @@ cartsRouter.post("/carts/:cid/:pid", async (req, res) => {
 
   try {
     const cart = await addProductToCartAdapter(cid, pid, parseInt(quantity));
+    
     success(res, cart, "Product added to cart successfully", 200);
   } catch (error) {
     err(res, "Bad Request", "Something Broke !", 400);
