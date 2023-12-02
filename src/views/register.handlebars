@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>Create user</h1>
+  <hr />
+  <article>
+    <form action="/api/sessions/register" method="post">
+      <div class="grid">
+        <div>
+          <label for="firstName">
+            First Name:
+            <input type="text" name="firstName" id="firstName" required />
+          </label>
+        </div>
+        <div>
+          <label for="lastName">
+            Last Name:
+            <input type="text" name="lastName" id="lastName" required />
+          </label>
+        </div>
+      </div>
+      <label for="email">
+        Email:
+        <input type="email" name="email" id="email" required />
+      </label>
+      <label for="password">
+        Password:
+        <input type="password" name="password" id="password" required />
+      </label>
+      <label for="age">
+        Age:
+        <input type="text" name="age" id="age" required />
+      </label>
+      <button type="submit">Register</button>
+      <a href="/login"> Login </a>
+    </form>
+  </article>
+</div>

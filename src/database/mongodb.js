@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGO_URI = `mongodb+srv://${process.env.MONGO_ADMIN}:${process.env.MONGO_ADMIN_PASSWORD}@test.tkegg6l.mongodb.net/ecommerce?retryWrites=true&w=majority`
+export const MONGO_URI = `mongodb+srv://${process.env.MONGO_ADMIN}:${process.env.MONGO_ADMIN_PASSWORD}@test.tkegg6l.mongodb.net/ecommerce?retryWrites=true&w=majority`
 
 export const initMongoDB  = async () => {
     try {
