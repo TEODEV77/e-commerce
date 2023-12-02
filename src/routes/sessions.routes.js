@@ -1,18 +1,22 @@
 import { Router } from "express";
-//import { isAuth } from "./auth/authentication";
+import bcrypt from "bcrypt";
 import {
   checkPassword,
   createPayload,
   createUser,
   findEmail,
 } from "../dao/user.js";
-import { error } from "../class/response.js";
-import { isAuth } from "./auth/authentication.js";
 
 const authRoute = Router();
 
 authRoute.post("/sessions/register", async (req, res) => {
   const { body } = req;
+
+  const { password } = body;
+
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  body.password = hash;
 
   try {
     const user = await createUser(body);
@@ -28,14 +32,22 @@ authRoute.post("/sessions/login", async (req, res) => {
   try {
     const userCheckEmail = await findEmail(email);
     if (userCheckEmail) {
-      const userCheckPass = await checkPassword(password);
-      if (userCheckPass) {
-        const payload = createPayload(userCheckPass);
+      const passwordHash = userCheckEmail.password;
+      const login = bcrypt.compareSync(password, passwordHash);
+      console.log(login);
+      if (login) {
+        const payload = createPayload(userCheckEmail);
         req.session.user = payload;
         res.redirect("/me");
+      } else {
+        return res.redirect("/badRequest");
       }
     }
-  } catch (error) {}
+  } catch (error) {
+    return res.redirect("/badRequest");
+  }
+
+  return res.redirect("/badRequest");
 });
 
 authRoute.get("/sessions/logout", (req, res) => {
@@ -45,6 +57,5 @@ authRoute.get("/sessions/logout", (req, res) => {
     }
   });
 });
-
 
 export default authRoute;

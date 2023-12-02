@@ -14,6 +14,7 @@ import loginRouter from "./routes/views/login.routes.js";
 import MongoStore from "connect-mongo";
 import { MONGO_URI } from "./database/mongodb.js";
 import authRoute from "./routes/sessions.routes.js";
+import clientErrorRouter from "./routes/views/clientErrors.routes.js";
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(
     store: MongoStore.create({
       mongoUrl: MONGO_URI,
       mongoOptions: {},
-      ttl: 300,
+      ttl: (60*2),
     }),
     secret,
     resave: true,
@@ -41,7 +42,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
 app.use("/api", productsRouter, cartsRouter, authRoute);
-app.use("/", socketProductRouter, chatRouter, productsViewRouter, loginRouter);
+app.use("/", clientErrorRouter ,socketProductRouter, chatRouter, productsViewRouter, loginRouter);
 
 app.use((error, req, res, next) => {
   res.status(500).send("Something broke!");
