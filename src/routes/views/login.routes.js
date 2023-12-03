@@ -12,7 +12,7 @@ loginRouter.get("/login", (req, res) => {
 });
 
 loginRouter.get("/me", isAuth, (req, res) => {
-  res.render('me');
+  res.render('me', req.session.user);
 });
 
 export default loginRouter;

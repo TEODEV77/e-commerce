@@ -29,6 +29,7 @@ export const createPayload = (user) => {
   const payload = {
     firstName: user.firstName,
     lastName: user.lastName,
+    role: user.role,
     email: user.email,
     age: user.age,
     cid: user.cid,

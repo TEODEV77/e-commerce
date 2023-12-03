@@ -25,7 +25,7 @@ app.use(
     store: MongoStore.create({
       mongoUrl: MONGO_URI,
       mongoOptions: {},
-      ttl: 60 * 2,
+      ttl: (60 * 5),
     }),
     secret,
     resave: true,

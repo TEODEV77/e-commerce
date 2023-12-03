@@ -34,9 +34,6 @@ productsViewRouter.get("/products", isAuth, async (req, res) => {
       productsPaginate: productsPaginate,
       user: req.session.user,
     };
-
-    console.log(data);
-
     res.render("products", data);
   } catch (error) {
     console.log(error.message);
