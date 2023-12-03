@@ -1,46 +1,40 @@
 <div class="container">
 
-  <div class="grid">
-    <div>
-      <h2><strong>Total Pages: {{totalPages}}</strong></h2>
+    <hr>
+    <h2><strong>Welcome, {{user.firstName}}</strong></h2>
+    <a href="/me">Profile</a>
+    <hr>
+
+    <div class="grid">
+      <div>
+        <h2><strong>Total Pages: {{productsPaginate.totalPages}}</strong></h2>
+      </div>
+      <div>
+        <h2><strong>Now: {{productsPaginate.page}}</strong></h2>
+      </div>
+      <div>
+        <a href="{{productsPaginate.prevPage}}"  {{#unless productsPaginate.hasPrevPage}} disabled {{/unless}}  role="button" >Prev </a>
+        <a href="{{productsPaginate.nextPage}}" {{#unless productsPaginate.hasNextPage}} disabled {{/unless}}   role="button" >Next </a>
+      </div>
     </div>
-    <div>
-      <h2><strong>Now: {{page}}</strong></h2>
-    </div>
-    <div>
-      <a href="{{prevPage}}"  {{#unless hasPrevPage}} disabled {{/unless}}  role="button" >Prev </a>
-      <a href="{{nextPage}}" {{#unless hasNextPage}} disabled {{/unless}}   role="button" >Next </a>
-    </div>
-  </div>
 
+    
 
-  <table>
-  <thead>
-    <tr>
-      <th scope="col">Title</th>
-      <th scope="col">Category</th>
-      <th scope="col">Description</th>
-      <th scope="col">Stock</th>
-      <th scope="col">Price</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
+  {{#each productsPaginate.payload.list}}
 
-  {{#each payload}}
-    <tr>
-      <td>{{this.title}}</td>
-      <td>{{this.category}}</td>
-      <td>{{this.description}} </td>
-      <td>{{this.stock}} </td>
-      <td>{{this.price}}</td>
-      <td> <button  onclick="addToCart('{{this._id}}')"> Add to cart </button> </td>
-      
-    </tr>
+  <details>
+    <summary role="button" class="contrast">{{this.title}} - Price: ${{this.price}}</summary>
+    <article>
+      <p><strong>Category: </strong>{{this.category}}</p>
+      <p><strong>Description: </strong>{{this.description}}</p>
+      <p><strong>Stock: </strong>{{this.stock}}</p>
+      <p><strong>Price: </strong>{{this.price}}</p>
+      <button  onclick="addToCart('{{../user.cid}}','{{this._id}}')"> Add to cart </button> 
 
-    {{/each}}
-  </tbody>
-</table>
+    </article>
+  </details>
+
+  {{/each}}
 
 
 </div>

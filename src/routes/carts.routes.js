@@ -52,8 +52,8 @@ cartsRouter.put("/carts/:cid", async (req, res) => {
   const { products } = req.body;
 
   try {
-    const w = await addArray(cid, products);
-    res.json(w);
+    const cart = await addArray(cid, products);
+    res.json(cart);
   } catch (error) {
     res.json(error.message);
   }

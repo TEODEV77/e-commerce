@@ -17,6 +17,24 @@
           </label>
         </div>
       </div>
+      <label for="">Role:</label>
+      <details role="list">
+        <summary aria-haspopup="listbox">Role</summary>
+        <ul role="listbox">
+          <li>
+            <label for="admin">
+              <input type="radio" id="admin" name="role" value="admin" />
+              Admin
+            </label>
+          </li>
+          <li>
+            <label for="user">
+              <input type="radio" id="user" name="role" value="user" />
+              User
+            </label>
+          </li>
+        </ul>
+      </details>
       <label for="email">
         Email:
         <input type="email" name="email" id="email" required />

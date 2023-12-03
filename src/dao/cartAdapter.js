@@ -42,15 +42,20 @@ export const addProductToCartAdapter = async (cid, pid, quantity) => {
   }
 };
 
-export const addArray = async (id,p) => {
+export const addArray = async (id, p) => {
   const cart = await getCartByIdAdapter(id);
 
-  if(cart){
+  if (cart) {
     cart.products = p;
     const out = await cartSchema.updateOne({ _id: id }, cart);
     return out;
   }
-}
+};
+
+export const deleteCartById = async (cid) => {
+  const result = await cartSchema.deleteOne({ _id: cid });
+  return result;
+};
 
 export const deleteProductToCartAdapter = async (cid, pid) => {
   const cart = await getCartByIdAdapter(cid);
@@ -84,7 +89,9 @@ export const getCartByIdAdapter = async (id) => {
 };
 
 export const getCartPopulate = async (id) => {
-  const cart = await cartSchema.findOne({ _id: id }).populate("products.product");
+  const cart = await cartSchema
+    .findOne({ _id: id })
+    .populate("products.product");
   return cart;
 };
 

@@ -1,11 +1,11 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
 import {
-  checkPassword,
   createPayload,
   createUser,
   findEmail,
 } from "../dao/user.js";
+import { createCartAdapter, deleteCartById } from "../dao/cartAdapter.js";
 
 const authRoute = Router();
 
@@ -17,12 +17,19 @@ authRoute.post("/sessions/register", async (req, res) => {
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
   body.password = hash;
+  let cid = '';
 
   try {
-    const user = await createUser(body);
+
+    const cart = await createCartAdapter();
+    cid = cart._id;
+    const user = await createUser(body,cid);
     res.redirect("/login");
+    return;
   } catch (error) {
+    const result = deleteCartById(cid);
     res.json(error.message);
+    return;
   }
 });
 
@@ -34,11 +41,11 @@ authRoute.post("/sessions/login", async (req, res) => {
     if (userCheckEmail) {
       const passwordHash = userCheckEmail.password;
       const login = bcrypt.compareSync(password, passwordHash);
-      console.log(login);
       if (login) {
         const payload = createPayload(userCheckEmail);
         req.session.user = payload;
-        res.redirect("/me");
+        res.redirect("/products");
+        return;
       } else {
         return res.redirect("/badRequest");
       }

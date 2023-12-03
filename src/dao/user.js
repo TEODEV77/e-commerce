@@ -1,7 +1,11 @@
 import userSchema from "../dao/models/user.model.js";
 
-export const createUser = async (payload) => {
-  const user = await userSchema.create(payload);
+export const createUser = async (payload, cid) => {
+  const userPayload = {
+    ...payload,
+    cid,
+  };
+  const user = await userSchema.create(userPayload);
   if (user) {
     return user;
   }
@@ -27,6 +31,7 @@ export const createPayload = (user) => {
     lastName: user.lastName,
     email: user.email,
     age: user.age,
+    cid: user.cid,
   };
 
   return payload;
