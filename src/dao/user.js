@@ -1,6 +1,12 @@
 import userSchema from "../dao/models/user.model.js";
 
 export const createUser = async (payload, cid) => {
+  const findEmail = await checkEmail(payload.email);
+
+  if (findEmail) {
+    return new Error("There is already a user with that email");
+  }
+
   const userPayload = {
     ...payload,
     cid,
@@ -12,7 +18,7 @@ export const createUser = async (payload, cid) => {
 };
 
 export const findEmail = async (email) => {
-  const user = await userSchema.findOne({ email: email });
+  const user = await userSchema.findOne({ email });
   if (user) {
     return user;
   }
@@ -36,4 +42,12 @@ export const createPayload = (user) => {
   };
 
   return payload;
+};
+
+export const checkEmail = async (email) => {
+  return await userSchema.findOne({ email: email });
+};
+
+export const findUserById = async (id) => {
+  return await userSchema.findOne({ _id: id });
 };

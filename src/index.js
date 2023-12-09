@@ -15,6 +15,8 @@ import MongoStore from "connect-mongo";
 import { MONGO_URI } from "./database/mongodb.js";
 import authRoute from "./routes/sessions.routes.js";
 import clientErrorRouter from "./routes/views/clientErrors.routes.js";
+import { init as initPassport } from "./config/passport.config.js";
+import passport from "passport";
 
 const app = express();
 
@@ -41,6 +43,10 @@ app.engine("handlebars", engine());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
 
+initPassport();
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/api", productsRouter, cartsRouter, authRoute);
 app.use(
   "/",
@@ -52,11 +58,12 @@ app.use(
 );
 
 app.get("/", (req, res) => {
+  
   res.redirect("/login");
 });
 
 app.use((error, req, res, next) => {
-  res.status(500).send("Something broke!");
+  res.status(500).send(error.message);
 });
 
 export default app;

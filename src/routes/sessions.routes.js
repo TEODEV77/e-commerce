@@ -1,11 +1,8 @@
 import { Router } from "express";
 import bcrypt from "bcrypt";
-import {
-  createPayload,
-  createUser,
-  findEmail,
-} from "../dao/user.js";
+import { createPayload, createUser, findEmail } from "../dao/user.js";
 import { createCartAdapter, deleteCartById } from "../dao/cartAdapter.js";
+import passport from "passport";
 
 const authRoute = Router();
 
@@ -17,13 +14,12 @@ authRoute.post("/sessions/register", async (req, res) => {
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
   body.password = hash;
-  let cid = '';
+  let cid = "";
 
   try {
-
     const cart = await createCartAdapter();
     cid = cart._id;
-    const user = await createUser(body,cid);
+    const user = await createUser(body, cid);
     res.redirect("/login");
     return;
   } catch (error) {
@@ -31,6 +27,10 @@ authRoute.post("/sessions/register", async (req, res) => {
     res.json(error.message);
     return;
   }
+});
+
+authRoute.post("/sessions/auth/register", passport.authenticate('register', {failureRedirect: '/login'}), async (req, res) => {
+  res.redirect("/login");
 });
 
 authRoute.post("/sessions/login", async (req, res) => {
