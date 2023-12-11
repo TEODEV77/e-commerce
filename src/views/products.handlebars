@@ -1,7 +1,7 @@
 <div class="container">
 
     <hr>
-    <h2><strong>Welcome, {{user.firstName}}</strong></h2>
+    <h2><strong>Welcome, {{user}}</strong></h2>
     <a href="/me">Profile</a>
     <hr>
 
@@ -29,7 +29,7 @@
       <p><strong>Description: </strong>{{this.description}}</p>
       <p><strong>Stock: </strong>{{this.stock}}</p>
       <p><strong>Price: </strong>{{this.price}}</p>
-      <button  onclick="addToCart('{{../user.cid}}','{{this._id}}')"> Add to cart </button> 
+      <button  onclick="addToCart('{{../cart}}','{{this._id}}')"> Add to cart </button> 
 
     </article>
   </details>

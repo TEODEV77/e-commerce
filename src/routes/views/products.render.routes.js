@@ -27,12 +27,13 @@ productsViewRouter.get("/products", isAuth, async (req, res) => {
     const productsPaginate = paginateResponseSuccess(products);
     const userCart = {
       list: productsPaginate.payload,
-      cid: req.session.user,
+      cid: req.user.cid,
     };
     productsPaginate.payload = userCart;
     const data = {
       productsPaginate: productsPaginate,
-      user: req.session.user,
+      user: req.user.firstName,
+      cart: req.user.cid,
     };
     res.render("products", data);
   } catch (error) {
