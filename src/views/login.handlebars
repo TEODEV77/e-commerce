@@ -1,7 +1,7 @@
 <div class="container">
   <article>
     <h1>Login</h1>
-    <form action="/api//sessions/login" method="post">
+    <form action="/api/sessions/auth/login" method="post">
       <label for="email">
         Email:
         <input type="email" name="email" id="email" required />
@@ -10,8 +10,36 @@
         Password:
         <input type="password" name="password" id="password" required />
       </label>
+
       <button type="submit">Login</button>
-      <a href="/register"> Register </a>
+      <div class="grid">
+        <div>
+          <a
+            style="border-radius: 17px;"
+            href="/api/sessions/github"
+            role="button"
+          >
+            <img
+              width="60"
+              height="60"
+              src="https://img.icons8.com/ios-glyphs/60/github.png"
+              alt="github"
+            />
+            Login with GitHub
+          </a>
+        </div>
+        <div>
+          <a href="/register" role="button">
+            <img
+              width="60"
+              height="60"
+              src="https://img.icons8.com/sf-black-filled/64/add.png"
+              alt="add"
+            />
+            Register
+          </a>
+        </div>
+      </div>
     </form>
   </article>
 </div>

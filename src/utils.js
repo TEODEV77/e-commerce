@@ -18,3 +18,10 @@ export const checkUserField = (
     return false;
   }
 };
+
+export const githubOptions = {
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: 'http://localhost:7070/api/sessions/github/callback',
+};
+

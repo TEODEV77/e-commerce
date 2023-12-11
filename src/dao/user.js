@@ -45,7 +45,7 @@ export const createPayload = (user) => {
 };
 
 export const checkEmail = async (email) => {
-  return await userSchema.findOne({ email: email });
+  return await userSchema.findOne({ email });
 };
 
 export const findUserById = async (id) => {

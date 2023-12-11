@@ -29,9 +29,35 @@ authRoute.post("/sessions/register", async (req, res) => {
   }
 });
 
-authRoute.post("/sessions/auth/register", passport.authenticate('register', {failureRedirect: '/login'}), async (req, res) => {
-  res.redirect("/login");
-});
+authRoute.post(
+  "/sessions/auth/login",
+  passport.authenticate("login", { failureFlash: "/unauthenticated" }),
+  (req, res) => {
+    console.log(req.user);
+    res.redirect("/me");
+  }
+);
+
+authRoute.post(
+  "/sessions/auth/register",
+  passport.authenticate("register", { failureRedirect: "/login" }),
+  async (req, res) => {
+    res.redirect("/login");
+  }
+);
+
+authRoute.get(
+  "/sessions/github",
+  passport.authenticate("github", { scope: ["user:email"] })
+);
+
+authRoute.get(
+  "/sessions/github/callback",
+  passport.authenticate("github", { failureRedirect: "/login" }),
+  (req, res) => {
+    res.redirect("/me");
+  }
+);
 
 authRoute.post("/sessions/login", async (req, res) => {
   const { email, password } = req.body;
